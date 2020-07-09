@@ -144,7 +144,7 @@ export default class Multiline extends NavigationMixin (LightningElement) {
 
     onFocusOutAccount(event){
         const editid = event.target.dataset.editid;
-        this.template.querySelector('div[data-editid="' + editid + '"]').classList.toggle("slds-hidden");
+     //   this.template.querySelector('div[data-editid="' + editid + '"]').classList.toggle("slds-hidden");
     }
 
     saveChanges(event) {
