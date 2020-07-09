@@ -1,0 +1,124 @@
+<template>
+    <div class="slds-table--edit_container slds-is-relative  inlineEdit--enabled keyboardMode--active inlineEditGrid forceInlineEditGrid">
+        <table class="slds-table forceRecordLayout slds-table--header-fixed slds-table--edit slds-table--bordered uiVirtualDataTable">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th>
+                        <div class="slds-truncate" title="Name">Opportunity Name</div>
+                    </th>
+                    <th>
+                        <div class="slds-truncate" title="Account">Account Name</div>
+                    </th>
+                    <th>
+                        <div class="slds-truncate" title="Close">Close date</div>
+                    </th>
+                    <th>
+                        <div class="slds-truncate" title="Stage">Stage</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={opportunities} for:item="opportunity">
+                    <tr class="slds-hint-parent" key={opportunity.Id} data-trid={opportunity.Id} >
+                        
+                        <td class="slds-cell-edit" data-tdid={opportunity.idName} data-tds="tabletds">
+                            
+                            <span class="slds-grid slds-grid_align-spread " >
+                                <span class="slds-truncate">{opportunity.Name}</span>
+                                <span class="triggerContainer" data-tdid={opportunity.idName} >
+                                <button onclick={editField}  data-inputid={opportunity.idName}
+                                    data-opportunityname={opportunity.Name} data-buttonid="id"
+                                    class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small editIcon">
+                                    <svg data-button="edit"  class="slds-button__icon   slds-button__icon_edit"
+                                        data-svgid={opportunity.idName}>
+                                        <use
+                                            xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#edit">
+                                        </use>
+                                    </svg>
+                                </button>
+                            </span>
+                                <lightning-input data-editid={opportunity.idName} onfocusout={onFocusOut}
+                                    value={opportunity.Name} data-opportunityid={opportunity.Id} class="slds-hidden"
+                                    data-element="Opportunity">
+                                </lightning-input>
+                            </span>
+                        
+                        </td>
+                        <td class="slds-cell-edit cellContainer" data-tdid={} data-tds="tabletds">
+                            <span class="slds-grid slds-grid_align-spread">
+                                <span class="slds-truncate">{opportunity.AccountId}</span>
+                                <button onclick={clickedEditPickListIcon} data-inputid={}
+                                    data-accountid={} data-buttonid="id"
+                                    class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small editIcon">
+                                    <svg  aria-hidden="true" class="slds-button__icon   slds-button__icon_edit"  
+                                        data-svgid={} >
+                                        <use
+                                            xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#edit">
+                                        </use>
+                                    </svg>
+                                </button>
+                                <!-- <c-inline-edit-list account={account} onrerenderaccounts={reRenderAccounts}
+                                    onenableeditbuttons={setDisabledFalse} onaccountptions={accountOptions}>
+                                </c-inline-edit-list> -->
+                            </span>
+                        </td>
+
+                        <td class="slds-cell-edit" data-tdid={} data-tds="tabletds">
+                            
+                            <span class="slds-grid slds-grid_align-spread " >
+                                <span class="slds-truncate">{opportunity.CloseDate}</span>
+                                <span class="triggerContainer" data-tdid={} >
+                                <button onclick={editField}  data-inputid=}
+                                    data-accountname={opportunity.Name} data-buttonid="id"
+                                    class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small editIcon">
+                                    <svg data-button="edit"  class="slds-button__icon   slds-button__icon_edit"
+                                        data-svgid={}>
+                                        <use
+                                            xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#edit">
+                                        </use>
+                                    </svg>
+                                </button>
+                            </span>
+                                <lightning-input data-editid={} onfocusout={hideEditField}
+                                    value={opportunity.CloseDate} data-accountid={opportunity.Id} class="slds-hidden"
+                                    data-element="CloseDate">
+                                </lightning-input>
+                            </span>
+                        
+                        </td>
+
+                        <td class="slds-cell-edit" data-tdid={} data-tds="tabletds">
+                            
+                            <span class="slds-grid slds-grid_align-spread " >
+                                <span class="slds-truncate">{opportunity.StageName}</span>
+                                <span class="triggerContainer" data-tdid={} >
+                                <button onclick={editField}  data-inputid=}
+                                    data-accountname={opportunity.Name} data-buttonid="id"
+                                    class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small editIcon">
+                                    <svg data-button="edit"  class="slds-button__icon   slds-button__icon_edit"
+                                        data-svgid={}>
+                                        <use
+                                            xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#edit">
+                                        </use>
+                                    </svg>
+                                </button>
+                            </span>
+                                <lightning-input data-editid={} onfocusout={hideEditField}
+                                    value={opportunity.StageName} data-accountid={opportunity.Id} class="slds-hidden"
+                                    data-element="StageName">
+                                </lightning-input>
+                            </span>
+                        
+                        </td>
+
+                        
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <div data-buttonsid="cancelSave" class="slds-hidden slds-docked-form-footer">
+            <button class="slds-button slds-button_neutral" onclick={cancelChanges} title="Cancel">Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={handleDataChanges} title="Save">Save</button>
+        </div>
+    </div>
+</template>

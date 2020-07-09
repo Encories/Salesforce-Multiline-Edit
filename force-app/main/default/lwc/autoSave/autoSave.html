@@ -1,0 +1,45 @@
+<template>
+    <div class="slds-align_absolute-center">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+            <caption class="slds-text-heading_large">Leads:</caption>
+             <thead>
+                <tr class="slds-text-title_caps">
+                    <th>
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th>
+                        <div class="slds-truncate" title="Title">Title</div>
+                    </th>
+                    <th>
+                        <div class="slds-truncate" title="Phone">Phone</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={leads} for:item="lead">
+                    <c-auto-save-list lead={lead} key={lead.Id} onhandledatachanges={handleDataChanges}></c-auto-save-list>
+                </template>
+            </tbody>
+        </table>
+    </div>
+        <div class="slds-align_absolute-center">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                <caption class="slds-text-heading_large">Contacts:</caption>
+                 <thead>
+                    <tr class="slds-text-title_caps">
+                        <th>
+                            <div class="slds-truncate" title="Id">Id</div>
+                        </th>
+                        <th>
+                            <div class="slds-truncate" title="Name">Name</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={contacts} for:item="contact">
+                        <c-contacts-list contact={contact} key={contact.Id}></c-contacts-list>
+                    </template> 
+                </tbody>
+            </table>
+        </div>
+ </template>

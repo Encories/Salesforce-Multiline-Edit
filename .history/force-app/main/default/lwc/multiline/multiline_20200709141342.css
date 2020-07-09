@@ -1,0 +1,46 @@
+:host {
+    display: table-row;
+}
+
+lightning-input {
+    position: absolute; 
+    top:-1.2rem; 
+    left:0rem; 
+    width: 10rem;
+}
+
+div.slds-docked-form-footer {
+    position:inherit;
+}
+
+div.opportunityacc {
+    position: absolute; 
+    top:-1rem; 
+    left:0rem; 
+    width: 10rem;
+}
+
+
+
+
+
+
+.selectedOption {
+    width: 99.5%;
+    position: absolute;
+    z-index: 10;
+}
+
+.targetOption {
+    position: relative;
+}
+
+.search-result_left-pad {
+    padding-left: 35px !important;
+}
+
+.slds-input-has-border_padding {
+    border: 1px solid grey;
+    padding: 3px;
+    background: white;
+}

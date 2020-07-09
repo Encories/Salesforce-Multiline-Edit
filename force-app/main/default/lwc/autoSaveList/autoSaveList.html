@@ -1,0 +1,35 @@
+<template>
+    <td>
+        <template if:true={lead.Name}>
+            <div class="slds-truncate" title="Name">
+                <a data-id={lead.Id} onclick={navigateToLead}>{lead.Name}</a>
+            </div>
+        </template>
+    </td>
+    <td>
+        <div class="slds-truncate" title="Title">
+            <lightning-input type="text" 
+                             data-element="Title"  
+                             field-name="Title" 
+                             class="slds-m-bottom_small" 
+                             value={lead.Title}
+                             data-id={lead.Id}
+                             onchange={handleDataChanges}
+                             variant="label-hidden">
+            </lightning-input>
+        </div>
+    </td>
+    <td>
+        <div class="slds-truncate" title="Phone">
+            <lightning-input type="text" 
+                             data-element="Phone"  
+                             field-name="Phone" 
+                             class="slds-m-bottom_small" 
+                             value={lead.Phone}
+                             data-id={lead.Id}
+                             onchange={handleDataChanges}
+                             variant="label-hidden">
+            </lightning-input>
+        </div>
+    </td>
+</template>

@@ -1,0 +1,14 @@
+:host {
+    display: table-row;
+}
+
+lightning-input {
+    position: absolute; 
+    top:-1.2rem; 
+    left:0rem; 
+    width: 10rem;
+}
+
+div.slds-docked-form-footer {
+    position:inherit;
+}

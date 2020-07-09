@@ -1,0 +1,7 @@
+:host {
+    display: table-row;
+}
+
+div.slds-modal__content {
+    text-align: center;
+  }

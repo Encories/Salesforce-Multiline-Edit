@@ -1,0 +1,251 @@
+<template>
+    <div
+        class="slds-table--edit_container slds-is-relative  inlineEdit--enabled keyboardMode--active inlineEditGrid forceInlineEditGrid">
+        <table
+            class="slds-table forceRecordLayout slds-table--header-fixed slds-table--edit slds-table--bordered uiVirtualDataTable">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th>
+                        <div class="slds-truncate" title="Name">Opportunity Name</div>
+                    </th>
+                    <th>
+                        <div class="slds-truncate" title="Account">Account Name</div>
+                    </th>
+                    <th>
+                        <div class="slds-truncate" title="Close">Close date</div>
+                    </th>
+                    <th>
+                        <div class="slds-truncate" title="Stage">Stage</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={opportunities} for:item="opportunity">
+                    <tr class="slds-hint-parent" key={opportunity.Id} data-trid={opportunity.Id}>
+                        <td class="slds-cell-edit" data-tdid={opportunity.idName} data-tds="tabletds">
+                            <span class="slds-grid slds-grid_align-spread ">
+                                <a data-editid={opportunity.idName} data-opportunity-id={opportunity.Id}
+                                    onclick={navigateToOpportunity} class="slds-truncate">{opportunity.Name}</a>
+                                <span class="triggerContainer" data-tdid={opportunity.idName}>
+                                    <button onclick={editField} data-inputid={opportunity.idName}
+                                        data-opportunityname={opportunity.Name} data-buttonid="id"
+                                        class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small editIcon">
+                                        <svg data-button="edit" class="slds-button__icon   slds-button__icon_edit"
+                                            data-svgid={opportunity.idName}>
+                                            <use
+                                                xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#edit">
+                                            </use>
+                                        </svg>
+                                    </button>
+                                </span>
+                                <lightning-input data-editid={opportunity.idName} onfocusout={onFocusOut}
+                                    value={opportunity.Name} data-opportunityid={opportunity.Id} class="slds-hidden"
+                                    data-element="Opportunity">
+                                </lightning-input>
+                            </span>
+                        </td>
+                        <td class="slds-cell-edit cellContainer" data-tdid={idAccount} data-tds="tabletds">
+                            <span class="slds-grid slds-grid_align-spread">
+                                <span class="slds-truncate">{opportunity.AccountId}</span>
+                                <span class="triggerContainer" data-tdid={opportunity.idAccount}></span>
+                                <button onclick={editAccount} data-inputid={opportunity.idAccount}
+                                    data-opportunitydate={opportunity.AccountId} data-buttonid="id"
+                                    class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small editIcon">
+                                    <svg aria-hidden="true" class="slds-button__icon   slds-button__icon_edit"
+                                        data-svgid={}>
+                                        <use
+                                            xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#edit">
+                                        </use>
+                                    </svg>
+                                </button>
+                            </span>
+                            <!-- <lightning-pill-container opportunities={opportunities} data-editid={opportunity.idAccount} onfocusout={onFocusOut}
+                            value={opportunity.AccountId} data-opportunityid={opportunity.Id} class="slds-hidden"
+                            data-element="Account"></lightning-pill-container> -->
+
+
+
+
+                            <!-- <div class="slds-form-element">
+                                
+                                <div class="slds-form-element__control">
+                                    <div class="slds-combobox_container">
+                                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"
+                                            aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                role="none">
+                                                
+                                                <div class="selectedOption slds-hide">
+                                                    <span
+                                                        class="slds-icon_container slds-icon-standard-account slds-combobox__input-entity-icon"
+                                                        title="Account">
+                                                        <lightning-icon icon-name="standard:account"
+                                                            alternative-text="account" size="x-small"></lightning-icon>
+
+                                                        <span class="slds-assistive-text">Account</span>
+                                                    </span>
+                                                    <input type="text"
+                                                        class="slds-input slds-combobox__input slds-combobox__input-value search-result_left-pad"
+                                                         aria-controls="listbox-id-5"
+                                                        autocomplete="off" role="textbox" placeholder="Select an Option"
+                                                        readonly="" value={selectedAccount} />
+                                                    <button
+                                                        class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                                                        title="Remove selected option">
+                                                        <lightning-icon icon-name="utility:close"
+                                                            alternative-text="close" size="x-small"
+                                                            onclick={handleRemoveSelectedOption}></lightning-icon>
+                                                        <span class="slds-assistive-text">Remove selected option</span>
+                                                    </button>
+                                                </div>
+                                                
+                                                <div class="defaultClass">
+                                                    <input type="text"
+                                                        class="slds-input slds-combobox__input slds-has-focus"
+                                                         aria-activedescendant="option1"
+                                                        aria-autocomplete="list" aria-controls="listbox-id-3"
+                                                        autocomplete="off" role="textbox" placeholder={opportunity.AccountId}
+                                                        onkeyup={handleKeyUp} value={search} />
+                                                    <span
+                                                        class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                        <lightning-icon icon-name="utility:search"
+                                                            alternative-text="Approved" size="x-small"></lightning-icon>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div 
+                                                class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid accounts_list slds-hide"
+                                                role="listbox">
+                                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                    <li role="presentation" class="slds-listbox__item">
+                                                        <div aria-selected="true" 
+                                                            class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_term slds-has-focus"
+                                                            role="option">
+                                                            <span class="slds-media__figure slds-listbox__option-icon">
+                                                                <span
+                                                                    class="slds-icon_container slds-icon-utility-search"
+                                                                    title="Search for term: ">
+                                                                    <lightning-icon icon-name="utility:search"
+                                                                        alternative-text="search" size="x-small">
+                                                                    </lightning-icon>
+                                                                    <span class="slds-assistive-text">Search for term:
+                                                                    </span>
+                                                                </span>
+                                                            </span>
+                                                            <span class="slds-media__body">
+                                                                <span
+                                                                    class="slds-listbox__option-text slds-listbox__option-text_entity">{search}</span>
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                    <template for:each={accounts.data} for:item="account">
+                                                        <li role="presentation" class="slds-listbox__item"
+                                                            key={account.Id} onclick={handleOptionSelect}
+                                                            data-id={account.Id} data-name={account.Name}>
+                                                            <div aria-selected="true" id={account.Id}
+                                                                class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                                                role="option" tabindex="0">
+                                                                <span
+                                                                    class="slds-media__figure slds-listbox__option-icon">
+                                                                    <span
+                                                                        class="slds-icon_container slds-icon-standard-account">
+                                                                        <lightning-icon icon-name="standard:account"
+                                                                            alternative-text="Account" small="x-small">
+                                                                        </lightning-icon>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="slds-media__body">
+                                                                    <span
+                                                                        class="slds-listbox__option-text slds-listbox__option-text_entity">{account.Name}</span>
+                                                                    
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+
+                            
+                                <c-multiline-lookup objectname="Account" data-editid={opportunity.idDate} iconname="standard:account" onselected={setAccount} onfocusout={onFocusOut}></c-multiline-lookup>
+                                <template if:true={account}>
+                                    <!-- <div class="demo-only" style="width: 30rem;">
+                                        <article class="slds-tile">
+                                            <h3 class="slds-tile__title slds-truncate" title="Account details"><a href="javascript:void(0);">Account details</a></h3>
+                                            <div class="slds-tile__detail">
+                                                <dl class="slds-list_horizontal slds-wrap">
+                                                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Name">Name :</dt>
+                                                    <dd class="slds-item_detail slds-truncate" title="Record Name">{account.Name}</dd>
+                                                    <dt class="slds-item_label slds-text-color_weak slds-truncate" title="Id">Id:</dt>
+                                                    <dd class="slds-item_detail slds-truncate" title="Record Id">{account.Id}</dd>
+                                                </dl>
+                                            </div>
+                                        </article>
+                                    </div> -->
+                                </template>
+                            
+
+
+
+
+
+
+
+                        </td>
+
+                        <td class="slds-cell-edit" data-tdid={opportunity.idDate} data-tds="tabletds">
+                            <span class="slds-grid slds-grid_align-spread">
+                                <span class="slds-truncate">{opportunity.CloseDate}</span>
+                                <span class="triggerContainer" data-tdid={opportunity.idDate}>
+                                    <button onclick={editDate} data-inputid={opportunity.idDate}
+                                        data-opportunitydate={opportunity.CloseDate} data-buttonid="id"
+                                        class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small editIcon">
+                                        <svg data-button="edit" class="slds-button__icon   slds-button__icon_edit"
+                                            data-svgid={}>
+                                            <use
+                                                xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#edit">
+                                            </use>
+                                        </svg>
+                                    </button>
+                                </span>
+                                <lightning-input type="date" data-editid={opportunity.idDate} onfocusout={onFocusOut}
+                                    value={opportunity.CloseDate} data-opportunityid={opportunity.Id}
+                                    class="slds-popover slds-hidden" data-element="CloseDate">
+                                </lightning-input>
+                            </span>
+                        </td>
+                        <td class="slds-cell-edit cellContainer" data-tdid={opportunity.idStage} data-tds="tabletds">
+                            <span class="slds-grid slds-grid_align-spread">
+                                <span class="slds-truncate">{opportunity.StageName}</span>
+                                <button onclick={editPickList} data-inputid={} data-opportunityid={opportunity.Id}
+                                    data-buttonid="id"
+                                    class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small editIcon">
+                                    <svg aria-hidden="true" class="slds-button__icon   slds-button__icon_edit"
+                                        data-svgid={}>
+                                        <use
+                                            xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#edit">
+                                        </use>
+                                    </svg>
+                                </button>
+                                <c-multiline-list opportunity={opportunity} onsetopportunity={setOpportunity}
+                                    onenableeditbuttons={setDisabledFalse} onaccountptions={accountOptions}>
+                                </c-multiline-list>
+                            </span>
+                        </td>
+
+
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <div data-buttonsid="cancelSave" class="slds-hidden slds-docked-form-footer">
+            <button class="slds-button slds-button_neutral" onclick={cancelChanges} title="Cancel">Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={saveChanges} title="Save">Save</button>
+        </div>
+    </div>
+</template>

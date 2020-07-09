@@ -1,0 +1,48 @@
+<template>
+
+    <form class="slds-form slds-form_inline slds-var-m-top_large slds-var-m-bottom_large slds-var-m-left_medium">
+        <lightning-input class="slds-text-title_caps"
+            type="search"
+            label="Search by name"
+            placeholder="type here..."
+            data-element="search-name"
+            value={name}>
+        </lightning-input>
+        <lightning-button class="slds-var-m-left_medium"
+            label="Filter" 
+            variant="brand" 
+            onclick={filterByName}>
+        </lightning-button>
+    </form>
+
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+        <caption class="slds-text-heading_large slds-var-m-left_medium">Contacts</caption>
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th>
+                    <div class="slds-truncate" title="First Name">First Name</div>
+                </th>
+                <th>
+                    <div class="slds-truncate" title="Last Name">Last Name</div>
+                </th>
+                <th>
+                    <div class="slds-truncate" title="Email">Email</div>
+                </th>
+                <th>
+                    <div class="slds-truncate" title="Account">Account</div>
+                </th>
+                <th>
+                    <div class="slds-truncate" title="Mobile Phone">Mobile Phone</div>
+                </th>
+                <th>
+                    <div class="slds-truncate" title="Created Date">Created Date</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={contacts} for:item="contact">
+                <c-vertic-list contact={contact} key={contact.Id}></c-vertic-list>
+            </template>
+        </tbody>
+    </table>
+</template>

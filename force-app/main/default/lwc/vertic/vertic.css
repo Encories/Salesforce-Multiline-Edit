@@ -1,0 +1,11 @@
+div.slds-box {
+    background-color:white;
+}
+
+div.slds-align_absolute-center {
+    width:70%;
+}
+
+caption.slds-text-heading_large{
+    text-align: center;
+}

@@ -1,0 +1,12 @@
+<template>
+    <td>
+        <div class="slds-truncate" title='Id'>{contact.idName}</div>
+    </td>
+    <td>
+        <template if:true={contact.Name}>
+            <div class="slds-truncate" title="Name">
+                <a data-id={contact.Id} onclick={navigateToContact}>{contact.Name}</a>
+            </div>
+        </template>
+    </td>
+</template>
